@@ -4,12 +4,19 @@ class BooksController < ApplicationController
     @user = current_user #userinfo取得用インスタンス
     @book = Book.all
     @newbook = Book.new #Book投稿用インスタンス
+    @favorites = Favorite.all #favorite取得用インスタンス
+    @new_favorite = Favorite.new #favorite投稿用インスタンス
+    @comment = BookComment.all #コメント取得用インスタンス
   end
 
   def show
     @user = current_user #userinfo取得用インスタンス
     @book = Book.find(params[:id])
     @newbook = Book.new #Book投稿用インスタンス
+    @favorites = Favorite.all #favorite取得用インスタンス
+    @new_favorite = Favorite.new #favorite投稿用インスタンス
+    @comment = BookComment.all #コメント取得用インスタンス
+    @newcomment = BookComment.new
   end
 
   def edit
@@ -31,7 +38,10 @@ class BooksController < ApplicationController
     else
       @user = current_user #userinfo取得用インスタンス
       @book = Book.all
-      @newbook = newbook #Book投稿用インスタンス
+      @newbook = newbook
+      @favorites = Favorite.all #favorite取得用インスタンス
+      @new_favorite = Favorite.new #favorite投稿用インスタンス
+      @comment = BookComment.all #コメント取得用インスタンス
       render :index
       # redirect_to books_path
     end
