@@ -5,7 +5,7 @@ class BooksController < ApplicationController
     @book = Book.all
     @newbook = Book.new #Book投稿用インスタンス
     @favorites = Favorite.all #favorite取得用インスタンス
-    @new_favorite = Favorite.new #favorite投稿用インスタンス
+    @newfavorite = Favorite.new #favorite投稿用インスタンス
     @comment = BookComment.all #コメント取得用インスタンス
   end
 
@@ -14,7 +14,7 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @newbook = Book.new #Book投稿用インスタンス
     @favorites = Favorite.all #favorite取得用インスタンス
-    @new_favorite = Favorite.new #favorite投稿用インスタンス
+    @newfavorite = Favorite.new #favorite投稿用インスタンス
     @comment = BookComment.all #コメント取得用インスタンス
     @newcomment = BookComment.new
   end
@@ -63,6 +63,7 @@ class BooksController < ApplicationController
     book.destroy
     redirect_to books_path
   end
+  
 
   private
   def book_params

@@ -10,6 +10,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = Book.where('user_id': params[:id])
     @newbook = Book.new #Book投稿用インスタンス
+    @favorites = Favorite.all #favorite取得用インスタンス
+    @newfavorite = Favorite.new #favorite投稿用インスタンス
+    @comment = BookComment.all #コメント取得用インスタンス
+    @newcomment = BookComment.new
   end
 
   def edit

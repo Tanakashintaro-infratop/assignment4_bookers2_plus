@@ -1,24 +1,29 @@
 class FavoritesController < ApplicationController
   def create
-    favorite = Favorite.new
-    favorite.user_id = current_user.id
-    favorite.book_id = params[:book_id]
-    favorite.good = true
+    book = Book.find(params[:book_id])
+    favorite = current_user.favorites.new(book_id: book.id)
     favorite.save
-    if params[:from] == "books"
+
+    if URI(request.referer).path == books_path
       redirect_to books_path
+    elsif URI(request.referer).path == user_path(book.user)
+      redirect_to user_path(book.user)
     else
-      redirect_to book_path(params[:book_id])
+      redirect_to book_path(book)
     end
   end
 
   def destroy
-    favorite = Favorite.find(params[:id])
+    book = Book.find(params[:book_id])
+    favorite = current_user.favorites.find_by(book_id: book.id)
     favorite.destroy
-    if params[:from] == "books"
+
+    if URI(request.referer).path == books_path
       redirect_to books_path
+    elsif URI(request.referer).path == user_path(book.user)
+        redirect_to user_path(book.user)
     else
-      redirect_to book_path(favorite.book_id)
+      redirect_to book_path(book)
     end
   end
 
